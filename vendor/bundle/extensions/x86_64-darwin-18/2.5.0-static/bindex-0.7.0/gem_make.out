@@ -1,0 +1,15 @@
+current directory: /Users/yamamotokoutarou/rails/EatOut/vendor/bundle/gems/bindex-0.7.0/ext/skiptrace
+/Users/yamamotokoutarou/.rbenv/versions/2.5.3/bin/ruby -r ./siteconf20190424-23536-3peyuv.rb extconf.rb
+creating Makefile
+
+current directory: /Users/yamamotokoutarou/rails/EatOut/vendor/bundle/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /Users/yamamotokoutarou/rails/EatOut/vendor/bundle/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/cruby.bundle
+
+current directory: /Users/yamamotokoutarou/rails/EatOut/vendor/bundle/gems/bindex-0.7.0/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20190424-23536-1imibh9/skiptrace
