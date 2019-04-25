@@ -7,6 +7,11 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def admin
+    @posts = Post.all
+    @count = 1
+  end
+
   # GET /posts/1
   # GET /posts/1.json
   def show
@@ -14,7 +19,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new(start_time: Date.today)
+    @post = Post.new(start_time: params[:start_time])
   end
 
   # GET /posts/1/edit
