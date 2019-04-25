@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "posts/:start_time/new" => "posts#new"
+  get "posts/;id/:start_time/edit" => "posts#edit"
   resources :posts
   get '/' => "home#top"
   get "about" => "home#about"

@@ -14,12 +14,13 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    start_time = params[:start_time]
-    @post = Post.new(start_time: start_time)
+    @post = Post.new(start_time: Date.today)
   end
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
+    @post.start_time = params[:start_time]
   end
 
   # POST /posts
