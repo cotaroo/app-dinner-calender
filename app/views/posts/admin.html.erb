@@ -4,8 +4,6 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
-
 <%= month_calendar events: @posts do |date, posts| %>
   <%= link_to date , new_post_path(start_time: date)  %>
   
