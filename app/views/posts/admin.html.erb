@@ -13,7 +13,7 @@
     </div>
   <% elsif posts.blank? && date > Date.today && @count <= Post.count %>
     <div>
-      ○
+      <%= link_to "○", new_post_path(start_time: date)  %>
     </div>
   <% else %>
     <% posts.each do |post| %>
