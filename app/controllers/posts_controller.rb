@@ -31,7 +31,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    if Post.where(post_params).count == 0
+      @post = Post.new(post_params)
+    else
+      @post = Post.where(post_params).first
+      redirect_to edit_post_path(@post,start_time: @post.start_time) and return
+    end
 
     respond_to do |format|
       if @post.save
