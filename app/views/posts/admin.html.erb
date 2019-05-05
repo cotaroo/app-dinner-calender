@@ -5,15 +5,15 @@
 <br>
 
 <%= month_calendar events: @posts do |date, posts| %>
-  <%= link_to date , new_post_path(start_time: date)  %>
+  <%=  date  %>
   
   <% if posts.blank? && date > Date.today && @count > Post.count%>
     <div>
-      未定
+      <%= link_to "未定", new_post_path( start_time: date)  %>
     </div>
   <% elsif posts.blank? && date > Date.today && @count <= Post.count %>
     <div>
-      ○
+      <%= link_to "○", posts_admin_path(post:{content: "○", start_time: date}),  method: :post %>
     </div>
   <% else %>
     <% posts.each do |post| %>
