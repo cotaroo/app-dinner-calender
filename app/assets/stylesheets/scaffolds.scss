@@ -1,16 +1,16 @@
 body {
-//   background-color: #fff;
-//   color: #333;
+  background-color: rgb(245, 174, 41);
+  color: #333;
   margin: 33px;
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 35px;
-   line-height: 60px;
+  font-size: 50px;
+  line-height: 60px;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 15px;
-//   line-height: 18px;
+  font-size: 33px;
+  line-height: 18px;
 }
 
 pre {
@@ -75,4 +75,26 @@ div {
 
 label {
   display: block;
+}
+
+.content{
+  // border: 1px solid #aaa;
+  padding: 75px 0px;
+  font-size: 50px;
+}
+
+.day{
+  font-size: 30px;
+}
+
+.select{
+  font-size: 50px;
+}
+
+input[type="submit"] {
+  font-size: 50px;
+}
+
+.back{
+  font-size: 40px;
 }

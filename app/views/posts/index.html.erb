@@ -5,20 +5,22 @@
 <br>
 
 <%= month_calendar events: @posts do |date, posts| %>
-  <%=  date  %>
+  <%= date.month%>
+  /
+  <%=  date.day  %>
   
   <% if posts.blank? && date > Date.today && @count > Post.count%>
-    <div>
+    <div class="content">
       未定
     </div>
   <% elsif posts.blank? && date > Date.today && @count <= Post.count %>
-    <div>
+    <div class="content">
       ○
     </div>
   <% else %>
     <% posts.each do |post| %>
       <% @count += 1 %>
-      <div>
+      <div class="content">
         <%= post.content %>
       </div>
     <% end %>

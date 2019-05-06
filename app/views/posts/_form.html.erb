@@ -19,10 +19,10 @@
 
   <div class="field">
     晩ごはんいる？
-    <%= form.select :content,[["○","○"], ["×","×"], ["△","△"], ["未定","未定"]], {default: "未定"} %>
+    <%= form.select :content,[["○","○"], ["×","×"], ["△","△"], ["未定","未定"]], {default: "未定"}, class: "select" %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit%>
   </div>
 <% end %>
