@@ -1,19 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Calender</h1>
-
-</table>
+<h1>カレンダー</h1>
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
-
 <%= month_calendar events: @posts do |date, posts| %>
-  <%= date  %>
+  <%= date.month%>
+  /
+  <%=  date.day  %>
   
-  <% posts.each do |post| %>
-    <div>
-      <%= link_to post.content, edit_post_path(post,start_time: date)  %>
+  <% if posts.blank? && date > Date.today && @count > Post.count%>
+    <div class="content">
+      未定
     </div>
+  <% elsif posts.blank? && date > Date.today && @count <= Post.count %>
+    <div class="content">
+      ○
+    </div>
+  <% else %>
+    <% posts.each do |post| %>
+      <% @count += 1 %>
+      <div class="content">
+        <%= post.content %>
+      </div>
+    <% end %>
+
   <% end %>
+
 <% end %>

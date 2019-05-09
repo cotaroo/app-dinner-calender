@@ -1,24 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Calender</h1>
+<h1>カレンダー</h1>
 
 <br>
 
 <%= month_calendar events: @posts do |date, posts| %>
-  <%=  date  %>
+  <%= date.month%>
+  /
+  <%=  date.day  %>
   
-  <% if posts.blank? && date > Date.today && @count > Post.count%>
-    <div>
+  <% if posts.blank? && date > Date.today && $data_count > Post.count%>
+    <div class="content">
       <%= link_to "未定", new_post_path( start_time: date)  %>
     </div>
-  <% elsif posts.blank? && date > Date.today && @count <= Post.count %>
-    <div>
+  <% elsif posts.blank? && date > Date.today && $data_count <= Post.count %>
+    <div  class="content">
       <%= link_to "○", posts_admin_path(post:{content: "○", start_time: date}),  method: :post %>
     </div>
   <% else %>
     <% posts.each do |post| %>
       <% @count += 1 %>
-      <div>
+      <% $data_count = @count %>
+      <div  class="content">
         <%= link_to post.content, edit_post_path(post,start_time: date)  %>
       </div>
     <% end %>
