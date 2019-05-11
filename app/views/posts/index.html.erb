@@ -6,22 +6,29 @@
 
 <br>
 
+<% month_calendar events: @posts do |date, posts| %>
+ <% unless posts.blank? %>
+  <% @data_count += 1 %>
+ <% end %>
+<% end %>
+
 <%= month_calendar events: @posts do |date, posts| %>
   <%= date.month%>
   /
   <%=  date.day  %>
   
-  <% if posts.blank? && date > Date.today && @count > Post.count%>
+  <% if posts.blank? && date > Date.today && $data_count > Post.count%>
     <div class="content">
       未定
     </div>
-  <% elsif posts.blank? && date > Date.today && @count <= Post.count %>
+  <% elsif posts.blank? && date > Date.today && $data_count <= Post.count %>
     <div class="content">
       ○
     </div>
   <% else %>
     <% posts.each do |post| %>
       <% @count += 1 %>
+      <% $data_count = @count %>
       <div class="content">
         <%= post.content %>
       </div>

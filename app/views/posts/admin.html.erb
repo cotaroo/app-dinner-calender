@@ -6,23 +6,28 @@
 
 <br>
 
+<% month_calendar events: @posts do |date, posts| %>
+ <% unless posts.blank? %>
+  <% @data_count += 1 %>
+ <% end %>
+<% end %>
+
 <%= month_calendar events: @posts do |date, posts| %>
   <%= date.month%>
   /
   <%=  date.day  %>
   
-  <% if posts.blank? && date > Date.today && $data_count > Post.count%>
+  <% if posts.blank? && date > Date.today && @count > @data_count %>
     <div class="content">
-      <%= link_to "未定", new_post_path( start_time: date)  %>
+      <%= link_to "未定", new_post_path(start_time: date) %>
     </div>
-  <% elsif posts.blank? && date > Date.today && $data_count <= Post.count %>
+  <% elsif posts.blank? && date > Date.today && @count <= @data_count %>
     <div  class="content">
       <%= link_to "○", posts_admin_path(post:{content: "○", start_time: date}),  method: :post %>
     </div>
   <% else %>
     <% posts.each do |post| %>
       <% @count += 1 %>
-      <% $data_count = @count %>
       <div  class="content">
         <%= link_to post.content, edit_post_path(post,start_time: date)  %>
       </div>

@@ -1,17 +1,18 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
-  $data_count = 1
+  
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all
     @count = 1
+    @data_count = 0;
   end
 
   def admin
     @posts = Post.all
     @count = 1
+    @data_count = 0;
   end
 
   # GET /posts/1
