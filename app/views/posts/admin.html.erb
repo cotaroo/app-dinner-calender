@@ -20,8 +20,7 @@
 <% end %>
 
 <%= month_calendar events: @posts do |date, posts| %>
-  <%= date.month%>
-  /
+  
   <%=  date.day  %>
   
   <% if posts.blank? && date > Date.today && @count > @data_count && date.month > $save_date.month %>
@@ -30,7 +29,7 @@
     </div>
   <% elsif posts.blank? && date > Date.today && @count <= @data_count %>
     <div  class="content">
-      <%= link_to "○", posts_admin_path(post:{content: "○", start_time: date}),  method: :post %>
+      <%= link_to "◯", posts_admin_path(post:{content: "◯", start_time: date}),  method: :post %>
     </div>
 
   <% elsif posts.blank? && date > Date.today && @count > @data_count && date > $save_date %>
@@ -40,7 +39,7 @@
   
   <% elsif posts.blank? && date > Date.today && @count > @data_count && date.month <= $save_date.month %>
     <div class="content">
-      <%= link_to "○", new_post_path(start_time: date) %>
+      <%= link_to "◯", new_post_path(start_time: date) %>
     </div>
 
   <% else %>
