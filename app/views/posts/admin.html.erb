@@ -11,6 +11,12 @@
  <% unless posts.blank? %>
   <% @data_count += 1 %>
  <% end %>
+ <% $this_date = date %>
+
+<% end %>
+
+<% if $save_date.month > $this_date.month %>
+  <% @data_count += 1 %>
 <% end %>
 
 <%= month_calendar events: @posts do |date, posts| %>
@@ -18,7 +24,7 @@
   /
   <%=  date.day  %>
   
-  <% if posts.blank? && date > Date.today && @count > @data_count %>
+  <% if posts.blank? && date > Date.today && @count > @data_count && date.month > $save_date.month %>
     <div class="content">
       <%= link_to "未定", new_post_path(start_time: date) %>
     </div>
@@ -26,6 +32,17 @@
     <div  class="content">
       <%= link_to "○", posts_admin_path(post:{content: "○", start_time: date}),  method: :post %>
     </div>
+
+  <% elsif posts.blank? && date > Date.today && @count > @data_count && date > $save_date %>
+    <div class="content">
+      <%= link_to "未定", new_post_path(start_time: date) %>
+    </div>
+  
+  <% elsif posts.blank? && date > Date.today && @count > @data_count && date.month <= $save_date.month %>
+    <div class="content">
+      <%= link_to "○", new_post_path(start_time: date) %>
+    </div>
+
   <% else %>
     <% posts.each do |post| %>
       <% @count += 1 %>

@@ -1,18 +1,23 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   
+  
+  $save_date = Date.today << 3
+  $this_month = nil
+  
+
   # GET /posts
   # GET /posts.json
   def index
     @posts = Post.all
     @count = 1
-    @data_count = 0;
+    @data_count = 0
   end
 
   def admin
     @posts = Post.all
     @count = 1
-    @data_count = 0;
+    @data_count = 0
   end
 
   # GET /posts/1
@@ -36,6 +41,9 @@ class PostsController < ApplicationController
   def create
     if Post.where(post_params).count == 0
       @post = Post.new(post_params)
+      if $save_date < @post.start_time
+        $save_date = @post.start_time
+      end
     else
       @post = Post.where(post_params).first
       redirect_to edit_post_path(@post,start_time: @post.start_time) and return
