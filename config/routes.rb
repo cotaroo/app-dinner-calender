@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   resources :posts
   get '/' => "home#top"
   get "about" => "home#about"
-  post "push" => "linebot#push"
+  get "push" => "linebot#push"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
