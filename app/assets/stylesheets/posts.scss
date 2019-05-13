@@ -4,8 +4,22 @@
 
 .theme p{
   position: relative;
-	top: 200px;
+	top: 240px;
   margin-bottom: 250px;
 	font-size: 100px;
 	color: white;
+	margin-top: 0px;
+}
+
+span{
+	font-size: 100px;
+}
+
+.table-striped{
+	margin-top: 20px;
+}
+
+.calendar-heading{
+	text-align: center;
+	margin-top: 50px;
 }
