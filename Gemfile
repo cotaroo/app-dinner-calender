@@ -69,3 +69,5 @@ gem 'simple_calendar', '~> 2.0'
 group :production do
   gem 'pg'
 end
+
+gem 'line-bot-api'
