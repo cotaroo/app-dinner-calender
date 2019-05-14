@@ -50,7 +50,7 @@ class PostsController < ApplicationController
       message = 
       {
         type: 'text',
-        text: "浩太郎が晩ごはん情報を作成しました。\n" + @post.start_time + ":" + @post.content
+        text: "浩太郎が晩ごはん情報を作成しました。\n#{@post.start_time} : #{@post.content}"
     }
     client = Line::Bot::Client.new { |config|
         config.channel_secret = "da5be14c010d092c6a188bf9fb79f071"
