@@ -49,7 +49,7 @@ class PostsController < ApplicationController
 
       message = 
       {
-        type: 'string',
+        type: 'text',
         text: @post.content
     }
     client = Line::Bot::Client.new { |config|
