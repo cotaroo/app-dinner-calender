@@ -2,8 +2,10 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   
   
-  $save_date = Date.today << 3
-  $this_month = nil
+   $save_date = Date.today #<< 3
+  # $this_month = nil
+
+  $this_date = Date.today
   
 
   # GET /posts
@@ -12,12 +14,26 @@ class PostsController < ApplicationController
     @posts = Post.all
     @count = 1
     @data_count = 0
+
+    if params[:start_date].blank?
+      $this_date = Date.today
+    else
+      $this_date = Date.parse(params[:start_date])
+    end
+
   end
 
   def admin
     @posts = Post.all
     @count = 1
     @data_count = 0
+
+    if params[:start_date].blank?
+      $this_date = Date.today
+    else
+      $this_date = Date.parse(params[:start_date])
+    end
+
   end
 
   # GET /posts/1
@@ -47,17 +63,17 @@ class PostsController < ApplicationController
 
       # linebot
 
-      message = 
-      {
-        type: 'text',
-        text: "浩太郎が晩ごはん情報を作成しました。\n#{@post.start_time} : #{@post.content}"
-    }
-    client = Line::Bot::Client.new { |config|
-        config.channel_secret = "da5be14c010d092c6a188bf9fb79f071"
-        config.channel_token = "l6MsxS40JGaFsZlSSR3br5fZ1i6Ofks3hELPEne65kqzM695FyfjS1fgVUMWB93Vt/XCa0mY9nZTdOJ7/eqYoQnFCzEEBDrV7kiILjIqqf7+1Nqj7vpxnmZO6vUgwYWhU4RzTt6hH49bykuVByprcwdB04t89/1O/w1cDnyilFU="
-    }
-    response = client.push_message("Ubb563e765d94830aa20f3a1a251de66c", message)
-    p response
+    #   message = 
+    #   {
+    #     type: 'text',
+    #     text: "浩太郎が晩ごはん情報を作成しました。\n#{@post.start_time} : #{@post.content}"
+    # }
+    # client = Line::Bot::Client.new { |config|
+    #     config.channel_secret = "da5be14c010d092c6a188bf9fb79f071"
+    #     config.channel_token = "l6MsxS40JGaFsZlSSR3br5fZ1i6Ofks3hELPEne65kqzM695FyfjS1fgVUMWB93Vt/XCa0mY9nZTdOJ7/eqYoQnFCzEEBDrV7kiILjIqqf7+1Nqj7vpxnmZO6vUgwYWhU4RzTt6hH49bykuVByprcwdB04t89/1O/w1cDnyilFU="
+    # }
+    # response = client.push_message("Ubb563e765d94830aa20f3a1a251de66c", message)
+    # p response
 
     # ここまで
 
