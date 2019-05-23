@@ -103,7 +103,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to posts_admin_path(@post,start_time: @post.start_time), notice: '晩ごはん情報が更新されました' }
+        format.html { redirect_to posts_admin_path(start_date: @post.start_time), notice: '晩ごはん情報が更新されました' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
