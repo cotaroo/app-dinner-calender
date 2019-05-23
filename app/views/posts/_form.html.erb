@@ -22,6 +22,11 @@
     <%= form.select :content,[["◯","◯"], ["❌","❌"], ["🔺","🔺"], ["未定","未定"]], {default: "未定"}, class: "select" %>
   </div>
 
+  <div class="field">
+    追記
+    <%= form.select :comment,[["バイト","バイト"], ["遊び","遊び"], ["勉強","勉強"], ["その他","その他"]], {default: "遊び"}, class: "select" %>
+  </div>
+
   <div class="actions">
     <%= form.submit%>
   </div>

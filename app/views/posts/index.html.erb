@@ -26,7 +26,6 @@
       <div  class="content">
         ◯
       </div>
-
     <% elsif date >= Date.today %>
       <% posts.each do |post| %>
          <% if  post.start_time.month >= $this_date.month %>
@@ -34,6 +33,9 @@
         <% end %>
         <div class="content">
           <%=  post.content  %>
+        </div>
+        <div class="comment">
+          <%=  post.comment  %>
         </div>
       <% end %>
     <% end %>
