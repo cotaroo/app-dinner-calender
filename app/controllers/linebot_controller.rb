@@ -1,5 +1,5 @@
 class LinebotController < ApplicationController
-    def push
+    def reminder
         @post = Post.find_by(start_time: Date.today)
         message = {
 					type: 'text',
