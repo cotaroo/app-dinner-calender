@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   
   
-   $save_date = Date.today #<< 3
+  #  $save_date = Date.today #<< 3
   # $this_month = nil
 
   $this_date = Date.today
@@ -57,9 +57,9 @@ class PostsController < ApplicationController
   def create
     if Post.where(post_params).count == 0
       @post = Post.new(post_params)
-      if $save_date < @post.start_time
-        $save_date = @post.start_time
-      end
+      # if $save_date < @post.start_time
+      #   $save_date = @post.start_time
+      # end
 
       # linebot
 
@@ -85,7 +85,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save && request.referer&.include?(posts_admin_path)
-        format.html { redirect_to edit_post_path(@post,start_time: @post.start_time), notice: '晩ごはん情報が作成されました' }
+        format.html { redirect_to edit_post_path(@post,start_time: @post.start_time) }
         format.json { render :show, status: :created, location: @post }
       elsif @post.save && request.referer&.include?(new_post_path)
         format.html { redirect_to posts_admin_path(start_date: @post.start_time), notice: '晩ごはん情報が作成されました' }
@@ -100,9 +100,10 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to posts_admin_path, notice: '晩ごはん情報が更新されました' }
+        format.html { redirect_to posts_admin_path(@post,start_time: @post.start_time), notice: '晩ごはん情報が更新されました' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
