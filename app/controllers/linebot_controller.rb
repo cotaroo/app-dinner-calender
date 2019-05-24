@@ -3,7 +3,7 @@ class LinebotController < ApplicationController
 				# @post = Post.find_by(start_time: Date.today)
 				@i = 0
 				# case @post.content
-				case i
+				case @i
 				when 0
 					message = {
 						type: 'text',
