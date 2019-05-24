@@ -1,4 +1,4 @@
 task :push_task => :environment do
     linebot_controller = LinebotController.new
-    linebot_controller.pudh
+    linebot_controller.push
   end
