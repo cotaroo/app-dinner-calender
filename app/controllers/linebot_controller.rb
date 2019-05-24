@@ -2,7 +2,6 @@ class LinebotController < ApplicationController
     def push
         @post = Post.find_by(start_time: Date.today)
         message = {
-					,
 					case @post.content
                     when "◯"
                         type: 'text',
