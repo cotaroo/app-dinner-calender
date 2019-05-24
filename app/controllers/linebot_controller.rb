@@ -1,6 +1,6 @@
 class LinebotController < ApplicationController
-    def push
-				@post = Post.find_by(start_time: Date.today)
+		def push
+				@post = Post.find_by(start_time: Date.today.next_day)
 				case @post.content
 				when "◯"
 					message = {
@@ -24,7 +24,7 @@ class LinebotController < ApplicationController
 					}
 				end
 		
-				if @post.content.blank?
+				if @post == nil
 					message = {
 						type: 'text',
 						text: "今日は晩ごはんを家で食べます。\n夜19時ごろには家にいると思います。\n変更があれば連絡します。\nいつも美味しいご飯ありがとうございます"
