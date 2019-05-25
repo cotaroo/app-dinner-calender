@@ -1,7 +1,6 @@
 class LinebotController < ApplicationController
 
 	require 'line/bot'
-	@@userid = 0
 
 		def push
 
@@ -43,7 +42,7 @@ class LinebotController < ApplicationController
             config.channel_secret = "1574242480"
             config.channel_token = "da5be14c010d092c6a188bf9fb79f071"
         }
-        response = client.push_message(@@userId, message)
+        response = client.push_message("Ubb563e765d94830aa20f3a1a251de66c", message)
         p response
 		end
 		
@@ -61,6 +60,7 @@ class LinebotController < ApplicationController
 		# 		p 'UserID: ' + userId # UserIdを確認
 		# 	end
 		# end
+
   # recieveアクションのCSRFトークン認証を無効
   protect_from_forgery :except => [:recieve]
 
@@ -93,7 +93,8 @@ class LinebotController < ApplicationController
       #   #   client.reply_message(event['replyToken'], message)
       #   # end
 			# end
-			@@userId = event['source']['userId']  #userId取得
+			userId = event['source']['userId']  #userId取得
+			p 'UserID: ' + userId # UserIdを確認
     }
 
     head :ok
