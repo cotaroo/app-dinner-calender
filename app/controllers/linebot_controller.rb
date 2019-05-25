@@ -1,6 +1,6 @@
 class LinebotController < ApplicationController
 
-
+	require 'line/bot'
 		def push
 
 				@post = Post.find_by(start_time: Date.today)
@@ -47,15 +47,18 @@ class LinebotController < ApplicationController
 
 
 		
-		# def recieve
-		# 	body = request.body.read
-
-		# 	events = client.parse_events_from(body)
-		# 	events.each { |event|
-		# 		@@groupId = event['source']['groupId']  #userId取得
-		# 		# p 'UserID: ' + userId # UserIdを確認
-		# 	end
-		# 	head :ok
-		# end
+		def client
+			@client ||= Line::Bot::Client.new { |config|
+				config.channel_secret = "1636329139"
+				config.channel_token = "7171b889a85e446a3222c6384d319903"
+			}
+		end
+		def recieve
+			body = request.body.read
+			events = client.parse_events_from(body)
+			events.each { |event|
+				userId = event['source']['userId']  #userId取得
+				p 'UserID: ' + userId # UserIdを確認
+			end
 
 end
