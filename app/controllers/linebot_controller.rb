@@ -42,7 +42,7 @@ class LinebotController < ApplicationController
             config.channel_secret = "1574242480"
             config.channel_token = "da5be14c010d092c6a188bf9fb79f071"
         }
-        response = client.push_message("Ubb563e765d94830aa20f3a1a251de66c", message)
+        response = client.push_message("73baeba6-93fd-4f10-a6ce-6bc432757d07", message)
         p response
 		end
 		
