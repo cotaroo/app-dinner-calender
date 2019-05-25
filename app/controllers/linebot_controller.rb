@@ -1,4 +1,5 @@
-
+class LinebotController < ApplicationController
+	
                 # @@groupId = 0
                 def push
 
@@ -52,4 +53,5 @@ p response
 	#               # p 'UserID: ' + userId # UserIdを確認
 	#       end
 	# end
+end
 end
