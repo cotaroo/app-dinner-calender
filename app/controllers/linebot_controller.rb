@@ -63,8 +63,8 @@ class LinebotController < ApplicationController
 
 		require 'line/bot'  # gem 'line-bot-api'
 
-  # callbackアクションのCSRFトークン認証を無効
-  protect_from_forgery :except => [:callback]
+  # recieveアクションのCSRFトークン認証を無効
+  protect_from_forgery :except => [:recieve]
 
   def client
     @client ||= Line::Bot::Client.new { |config|
@@ -73,7 +73,7 @@ class LinebotController < ApplicationController
     }
   end
 
-  def callback
+  def recieve
     body = request.body.read
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
