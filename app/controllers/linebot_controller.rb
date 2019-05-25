@@ -56,8 +56,8 @@ class LinebotController < ApplicationController
 		
 		# 	events = client.parse_events_from(body)
 		# 	events.each do |event|
-		# 		userId = event['source']['userId']  #userId取得
-		# 		p 'UserID: ' + userId # UserIdを確認
+		# 		groupId = event['source']['groupId']  #groupId取得
+		# 		p 'groupID: ' + groupId # groupIdを確認
 		# 	end
 		# end
 
@@ -93,8 +93,8 @@ class LinebotController < ApplicationController
       #   #   client.reply_message(event['replyToken'], message)
       #   # end
 			# end
-			userId = event['source']['userId']  #userId取得
-			p 'UserID: ' + userId # UserIdを確認
+			groupId = event['source']['groupId']  #groupId取得
+			p 'groupID: ' + groupId # groupIdを確認
     }
 
     head :ok
