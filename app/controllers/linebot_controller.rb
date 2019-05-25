@@ -46,21 +46,6 @@ class LinebotController < ApplicationController
         p response
 		end
 		
-		# def recieve
-		# 	body = request.body.read
-		
-		# 	signature = request.env['HTTP_X_LINE_SIGNATURE']
-		# 	unless client.validate_signature(body, signature)
-		# 		error 400 do 'Bad Request' end
-		# 	end
-		
-		# 	events = client.parse_events_from(body)
-		# 	events.each do |event|
-		# 		groupId = event['source']['groupId']  #groupId取得
-		# 		p 'groupID: ' + groupId # groupIdを確認
-		# 	end
-		# end
-
   # recieveアクションのCSRFトークン認証を無効
   protect_from_forgery :except => [:recieve]
 
@@ -82,17 +67,6 @@ class LinebotController < ApplicationController
     events = client.parse_events_from(body)
 
     events.each { |event|
-      # case event
-      # when Line::Bot::Event::Message
-      #   # case event.type
-      #   # when Line::Bot::Event::MessageType::Text
-      #   #   message = {
-      #   #     type: 'text',
-      #   #     text: event.message['text']
-      #   #   }
-      #   #   client.reply_message(event['replyToken'], message)
-      #   # end
-			# end
 			groupId = event['source']['groupId']  #groupId取得
 			p 'groupID: ' + groupId # groupIdを確
     }
