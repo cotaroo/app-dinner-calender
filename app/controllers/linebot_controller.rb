@@ -60,5 +60,6 @@ class LinebotController < ApplicationController
 				userId = event['source']['userId']  #userId取得
 				p 'UserID: ' + userId # UserIdを確認
 			end
+		end
 
 end
