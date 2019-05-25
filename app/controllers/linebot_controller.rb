@@ -1,6 +1,7 @@
 class LinebotController < ApplicationController
 
 	require 'line/bot'
+
 		def push
 
 				@post = Post.find_by(start_time: Date.today)
@@ -58,7 +59,7 @@ class LinebotController < ApplicationController
 			events = client.parse_events_from(body)
 			events.each { |event|
 				userId = event['source']['userId']  #userId取得
-				p 'UserID: ' + userId # UserIdを確認
+				# p 'UserID: ' + userId # UserIdを確認
 			end
 		end
 
