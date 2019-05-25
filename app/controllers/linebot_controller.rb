@@ -1,5 +1,4 @@
 class LinebotController < ApplicationController
-	require 'line/bot'
 		@@groupId = 0
 		def push
 
@@ -48,17 +47,12 @@ class LinebotController < ApplicationController
 		def recieve
 			body = request.body.read
 
-			signature = request.env['HTTP_X_LINE_SIGNATURE']
-			unless client.validate_signature(body, signature)
-				error 400 do 'Bad Request' end
-			end
-
-	
 			events = client.parse_events_from(body)
 			events.each { |event|
 				@@groupId = event['source']['groupId']  #userId取得
 				# p 'UserID: ' + userId # UserIdを確認
 			end
+			head :ok
 		end
 
 end

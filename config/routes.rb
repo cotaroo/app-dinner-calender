@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  post :linebot, to: 'linebot#recieve'
   get "posts/:id/:start_time/edit" => "posts#edit"
   get "posts/:start_time/new" => "post#new"
   get "posts/admin" => "posts#admin"
@@ -8,5 +7,6 @@ Rails.application.routes.draw do
   get '/' => "home#top"
   get "about" => "home#about"
   get "push" => "linebot#push"
+  post :linebot, to: 'linebot#recieve'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
