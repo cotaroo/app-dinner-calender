@@ -41,29 +41,21 @@ class LinebotController < ApplicationController
 				end
 		
         client = Line::Bot::Client.new { |config|
-            config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-            config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+            config.channel_secret = "1574242480"
+            config.channel_token = "da5be14c010d092c6a188bf9fb79f071"
         }
         response = client.push_message(Ubb563e765d94830aa20f3a1a251de66c, message)
         p response
 		end
-
-
 		
-		def client
-			@client ||= Line::Bot::Client.new { |config|
-				config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-				config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
-			}
-		end
 		def recieve
 			body = request.body.read
-
+		
 			signature = request.env['HTTP_X_LINE_SIGNATURE']
 			unless client.validate_signature(body, signature)
 				error 400 do 'Bad Request' end
 			end
-	
+		
 			events = client.parse_events_from(body)
 			events.each do |event|
 				userId = event['source']['userId']  #userId取得
