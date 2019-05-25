@@ -94,7 +94,7 @@ class LinebotController < ApplicationController
       #   # end
 			# end
 			groupId = event['source']['groupId']  #groupId取得
-			p 'groupID: ' + groupId # groupIdを確認
+			p 'groupID: ' + groupId # groupIdを確
     }
 
     head :ok
