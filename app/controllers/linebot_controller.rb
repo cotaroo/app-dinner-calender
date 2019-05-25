@@ -1,5 +1,6 @@
 class LinebotController < ApplicationController
-		@@groupId = 0
+	require 'line/bot'
+		# @@groupId = 0
 		def push
 
 				@post = Post.find_by(start_time: Date.today)
@@ -40,7 +41,7 @@ class LinebotController < ApplicationController
             config.channel_secret = "da5be14c010d092c6a188bf9fb79f071"
             config.channel_token = "l6MsxS40JGaFsZlSSR3br5fZ1i6Ofks3hELPEne65kqzM695FyfjS1fgVUMWB93Vt/XCa0mY9nZTdOJ7/eqYoQnFCzEEBDrV7kiILjIqqf7+1Nqj7vpxnmZO6vUgwYWhU4RzTt6hH49bykuVByprcwdB04t89/1O/w1cDnyilFU="
         }
-        response = client.push_message(@@groupId, message)
+        response = client.push_message(userId, message)
         p response
 		end
 		
@@ -54,5 +55,19 @@ class LinebotController < ApplicationController
 		# 	end
 		# 	head :ok
 		# end
+
+		def client
+			@client ||= Line::Bot::Client.new { |config|
+				config.channel_secret = "da5be14c010d092c6a188bf9fb79f071"
+				config.channel_token = "l6MsxS40JGaFsZlSSR3br5fZ1i6Ofks3hELPEne65kqzM695FyfjS1fgVUMWB93Vt/XCa0mY9nZTdOJ7/eqYoQnFCzEEBDrV7kiILjIqqf7+1Nqj7vpxnmZO6vUgwYWhU4RzTt6hH49bykuVByprcwdB04t89/1O/w1cDnyilFU="
+			}
+		end
+		def recieve
+			body = request.body.read
+			events = client.parse_events_from(body)
+			events.each { |event|
+				userId = event['source']['userId']  #userId取得
+				p 'UserID: ' + userId # UserIdを確認
+			end
 
 end
