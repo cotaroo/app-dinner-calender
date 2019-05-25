@@ -64,7 +64,7 @@ class LinebotController < ApplicationController
 		require 'line/bot'  # gem 'line-bot-api'
 
   # recieveアクションのCSRFトークン認証を無効
-  protect_from_forgery :except => [:recieve]
+  # protect_from_forgery :except => [:recieve]
 
   def client
     @client ||= Line::Bot::Client.new { |config|
