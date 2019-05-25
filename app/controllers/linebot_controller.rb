@@ -1,6 +1,4 @@
 class LinebotController < ApplicationController
-	# require 'line/bot'
-		# @@groupId = 0
 
 
 		def push
