@@ -89,6 +89,11 @@ label {
   margin-bottom: 30px;
 }
 
+.content a:link {text-decoration: none;}
+.content a:visited {text-decoration: none;}
+.content area:hover {background: #BDE2F7;text-decoration: none;}
+.content a:active {text-decoration: none;}
+
 .day{
   font-size: 45px;
 }
