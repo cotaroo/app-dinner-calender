@@ -11,24 +11,26 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <span class="title">晩ごはん設定:</span>
+    <%= form.select :content,[["◯","◯"], ["❌","❌"], ["🔺","🔺"], ["未定","未定"]], class: "select" %>
+  </div>
+
   <div class="time">
-     <%#
     <%= form.date_select :start_time, {default: :start_time}%>
-    <%= @post.start_time %>
-    <%= form.hidden_field :start_time, {default: :start_time}%>
-    <span class="arrow">〉</span>
     <%#
-    <%= form.date_select :start_time, {default: :start_time}%>
+    <%= @post.start_time %>
+    <%#
+    <%= form.hidden_field :start_time, {default: :start_time}%>
+    <div class="end-time">
+      <span class="arrow">〉</span>
+      <%= form.date_select :start_time, {default: :start_time}%>
+    </div>
   </div>
 
   <div class="field">
-    晩ごはんいる？
-    <%= form.select :content,[["◯","◯"], ["❌","❌"], ["🔺","🔺"], ["未定","未定"]], {default: "未定"}, class: "select" %>
-  </div>
-
-  <div class="field">
-    追記
-    <%= form.select :comment,[["バイト","バイト"], ["遊び","遊び"], ["勉強","勉強"], ["その他","その他"], ["特になし",""]], {default: "遊び"}, class: "select" %>
+    <span class="title">詳細:</span>
+    <%= form.select :comment,[["バイト","バイト"], ["遊び","遊び"], ["勉強","勉強"], ["その他","その他"], ["特になし",""]], class: "select" %>
   </div>
 
   <div class="actions">

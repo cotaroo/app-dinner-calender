@@ -36,17 +36,37 @@ span{
 	border-bottom: medium solid #FF9833;
 	padding: 32px 0;
 }
+
+.time .end-time{
+	margin-top: 32px;
+}
+
 .time .arrow{
 	font-size: 40px;
+	margin-left: 32px;
+	color: #FF9833;
 }
 
 .time select{
 	font-size: 48px;
-	width: 128px;
+	width: auto;
 }
 
 #post_start_time_1i{
 	margin-left: 32px;
+}
+.field{
+	border-bottom: medium solid #FF9833;
+	padding: 32px 0;
+}
+
+.field .title{
+	margin-left: 32px;
+	font-size: 32px;
+}
+
+.field select{
+	font-size: 54px;
 }
 
 /* _header.html */
