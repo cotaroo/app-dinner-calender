@@ -2,13 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.theme p{
-  position: relative;
-	top: 240px;
-  margin-bottom: 250px;
-	font-size: 100px;
-	color: white;
-	margin-top: 0px;
+/* admin.html */
+
+.calendar-title{
+	position: absolute;
+	top: 59px;
+	left: 32px;
+	color: #FF9833;
 }
 
 span{
@@ -28,3 +28,69 @@ span{
 .calendar-heading a:visited {text-decoration: none;}
 .calendar-heading a:hover {background: #BDE2F7;text-decoration: none;}
 .calendar-heading a:active {text-decoration: none;}
+
+/*_form.html */
+.time{
+	border-bottom: medium solid #FF9833;
+	padding: 32px 0;
+}
+
+.time .end-time{
+	margin-top: 32px;
+}
+
+.time .arrow{
+	font-size: 40px;
+	margin-left: 32px;
+	color: #FF9833;
+}
+
+.time select{
+	font-size: 48px;
+	width: auto;
+}
+
+#post_start_time_1i{
+	margin-left: 32px;
+}
+.field{
+	border-bottom: medium solid #FF9833;
+	padding: 32px 0;
+}
+
+.field .title{
+	margin-left: 32px;
+	font-size: 32px;
+}
+
+.actions{
+	position: absolute;
+	top: 64px;
+	right: 32px;
+}
+
+input[type="submit" i] {
+	color: #FF9833
+}
+
+.field select{
+	font-size: 54px;
+}
+
+/* _header.html */
+header .new-schedule{
+	color: #FF8B1A;
+	font-size: 54px;
+	padding: 16px 0;
+
+}
+
+header .cancel{
+	color: #FF8B1A;
+	font-size: 42px;
+	margin: 0 108px 0 32px;
+}
+
+a:-webkit-any-link {
+	text-decoration: none;
+}
