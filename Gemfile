@@ -71,3 +71,6 @@ group :production do
 end
 
 gem 'line-bot-api'
+
+# conpassを導入
+gem "compass-rails"
