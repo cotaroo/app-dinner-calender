@@ -6,49 +6,19 @@ header {
   padding-top: 64px;
 }
 
-.header-logo {
-  float: left;
-  padding-left: 20px;
-  color: white;
-  font-size: 22px;
-  line-height: 64px;
-}
-
-.header-logo a{
-  color: white;
-  font-size: 52px;
+header a:-webkit-any-link {
+  color: #FF9833
 }
 
 .header-menus {
   float: right;
-  padding-right: 20px;
-}
-
-.header-menus li {
-  float: left;
-  line-height: 64px;
-  font-size: 13px;
-  color: white;
-  padding-left: 15px;
+  margin-right: 64px;
 }
 
 .header-menus a {
   float: left;
-  font-size: 33px;
-  color: white;
-}
-
-.header-menus .fa {
-  padding-right: 5px;
-}
-
-.header-menus input[type="submit"] {
-  padding: 0 20px;
-  float: left;
-  line-height: 64px;
-  color: white;
-  margin: 0;
-  font-size: 13px;
+  font-size: 44px;
+  margin-left: 42px;
 }
 
 /* top ================================ */
