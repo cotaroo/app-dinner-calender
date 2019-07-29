@@ -33,28 +33,55 @@
   .btn-circle-border-simple {
     display: inline-block;
     text-decoration: none;
-    color: rgb(216, 96, 27);
+	color: #FF9833;
     width: 360px;
     height: 360px;
     line-height: 360px;
     border-radius: 50%;
-    border: solid 2px rgb(216, 96, 27);
+    border: solid 2px #FF9833;
     text-align: center;
     overflow: hidden;
     font-weight: bold;
-      transition: .4s;
-      font-size: 150px;
-      margin-top: 50px;
-  }
-  
-  .top-choice p{
-      font-size: 80px;
-  }
+    transition: .4s;
+    font-size: 150px;
+    margin-top: 50px;
+	}
+
+	#ballon{
+		animation:3.5s Roll ease-in-out infinite;
+	}
+	
+	#ballon .FloatHorizontal{
+		display: block;
+		animation:FloatHorizontal 7.0s ease-in-out infinite alternate;
+	}
+	
+	#ballon .FloatVertical{
+		animation:FloatVertical 6.0s ease-in-out infinite alternate;
+	}
+
+	@keyframes Roll{
+		0% {transform:rotateZ(-5deg) scale(0.9);}
+		50% {transform:rotateZ(5deg) scale(1.0);}
+		100% {transform:rotateZ(-5deg) scale(0.9);}
+	}
+
+	@keyframes FloatHorizontal {
+		0% {transform: translate3d(2.5vw, 0, 0);}
+		50% {transform: translate3d(-2.5vw, 0, 0);}
+		100% {transform: translate3d(2.5vw, 0, 0);}
+	}
+
+	@keyframes FloatVertical {
+		0% {transform:translate3d(0, 2.5vw, 0);}
+		50% {transform:translate3d(0, -2.5vw, 0);}
+		100% {transform:translate3d(0, 2.5vw, 0);}
+	}
   
   .btn-circle-border-simple:hover {
     background: yellow;
-  }
-  
+	}
+
   /* about ================================ */
   .about-main {
     padding: 180px 8% 0;
