@@ -1,11 +1,4 @@
 <%= render 'layouts/header' %>
-<p id="notice"><%= notice %></p>
-
-<div class="theme">
-  <p>晩ごはんカレンダー<p>
-</div>
-
-<br>
 
   <% @posts.each do |post| %>
     <% if post.start_time.month >= $this_date.month %>
