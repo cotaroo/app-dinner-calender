@@ -5,12 +5,14 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 50px;
   line-height: 60px;
+  z-index: -2;
 }
 
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 33px;
   line-height: 18px;
+  margin: 0;
 }
 
 pre {

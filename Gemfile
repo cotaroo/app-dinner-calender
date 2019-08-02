@@ -71,3 +71,6 @@ group :production do
 end
 
 gem 'line-bot-api'
+
+#Using jquery
+gem 'jquery-rails'

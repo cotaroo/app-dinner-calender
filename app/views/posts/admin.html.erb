@@ -1,8 +1,8 @@
 <%= render 'layouts/header' %>
 
-<br>
-
 <p id="notice"><%= notice %></p>
+
+<br>
 
   <% @posts.each do |post| %>
     <% if post.start_time.month >= $this_date.month %>
