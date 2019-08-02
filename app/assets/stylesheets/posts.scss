@@ -21,7 +21,7 @@ span{
 
 .calendar-heading{
 	text-align: center;
-	margin-top: 50px;
+	margin-top: 16px;
 }
 
 .calendar-heading a:link {text-decoration: none;}
@@ -78,11 +78,10 @@ input[type="submit" i] {
 }
 
 /* _header.html */
-header .new-schedule{
-	color: #FF8B1A;
-	font-size: 54px;
-	padding: 16px 0;
 
+header{
+	z-index: 0;
+	position: relative;
 }
 
 header .cancel{
@@ -93,4 +92,16 @@ header .cancel{
 
 a:-webkit-any-link {
 	text-decoration: none;
+}
+
+/* new.html, edit.html */
+
+.header-title{
+	color: #FF8B1A;
+	font-size: 54px;
+	padding: 16px 0;
+	position: absolute;
+	left: 36%;
+	top: 42px;
+
 }
