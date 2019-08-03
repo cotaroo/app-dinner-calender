@@ -23,8 +23,7 @@ pre {
 
 a {
   &:hover {
-    color: #fff;
-    background-color: brown;
+    opacity: 0.4;
   }
 }
 
@@ -79,21 +78,9 @@ label {
   display: block;
 }
 
-.content{
-  // border: 1px solid #aaa;
-  padding: 65px 0px;
-  font-size: 50px;
-}
-
-.comment{
-  // border: 1px solid #aaa;
-  font-size: 35px;
-  margin-bottom: 30px;
-}
-
 .content a:link {text-decoration: none;}
 .content a:visited {text-decoration: none;}
-.content area:hover {background: #BDE2F7;text-decoration: none;}
+.content area:hover {text-decoration: none;}
 .content a:active {text-decoration: none;}
 
 .day{
