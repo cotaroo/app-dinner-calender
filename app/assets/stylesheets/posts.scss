@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-/* admin.html */
+/* admin.html, index.html */
 
 .calendar-title{
 	position: absolute;
@@ -20,14 +20,42 @@ span{
 }
 
 .calendar-heading{
+	border-top: medium solid #E3DCCA;
+	width:100%;
+	background-color: #ffffff;
+	position: absolute;
+	bottom: 0px;
+}
+
+.footer-menu {
+	padding-bottom: 32px;
 	text-align: center;
-	margin-top: 16px;
+	font-size:74px;
+	padding-top: 18px;
+}
+
+.footer-menu a:-webkit-any-link {
+    color: #808080;
 }
 
 .calendar-heading a:link {text-decoration: none;}
 .calendar-heading a:visited {text-decoration: none;}
-.calendar-heading a:hover {background: #BDE2F7;text-decoration: none;}
+.calendar-heading a:hover {text-decoration: none;}
 .calendar-heading a:active {text-decoration: none;}
+
+.content{
+	padding: 49px 0px;
+	font-size: 50px;
+  }
+  
+.comment{
+	font-size: 35px;
+	margin-bottom: 26px;
+}
+
+a:-webkit-any-link {
+	color: #401B01;
+}
 
 /*_form.html */
 .time{
