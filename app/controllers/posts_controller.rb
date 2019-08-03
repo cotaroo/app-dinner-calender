@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new(start_time: params[:start_time])
+    @post = Post.new(start_time: params[:start_time], end_time: params[:start_time])
   end
 
   # GET /posts/1/edit
@@ -55,7 +55,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    if Post.where(post_params).count == 0
+    # if true
+    # if Post.where(post_params).count == 0
       @post = Post.new(post_params)
       # if $save_date < @post.start_time
       #   $save_date = @post.start_time
@@ -78,10 +79,10 @@ class PostsController < ApplicationController
     # ここまで
 
 
-    else
-      @post = Post.where(post_params).first
-      redirect_to edit_post_path(@post,start_time: @post.start_time) and return
-    end
+    # else
+    #   @post = Post.where(post_params).first
+    #   redirect_to edit_post_path(@post,start_time: @post.start_time) and return
+    # end
 
     respond_to do |format|
       if @post.save && request.referer&.include?(posts_admin_path)
@@ -130,6 +131,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :comment, :start_time)
+      params.require(:post).permit(:content, :comment, :start_time, :end_time)
     end
 end

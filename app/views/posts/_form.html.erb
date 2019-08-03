@@ -29,14 +29,14 @@
     
     <div class="end-time">
       <span class="arrow">〉</span>
-      <%= form.date_select :start_time, {default: :start_time}%>
+      <%= form.date_select :end_time, {default: :end_time}%>
     </div>
 
   </div>
 
   <div class="field">
     <span class="title">詳細:</span>
-    <%= form.select :comment,[["バイト","バイト"], ["遊び","遊び"], ["勉強","勉強"], ["その他","その他"], ["特になし",""]], class: "select" %>
+    <%= form.select :comment,[["バイト","バイト"], ["遊び","遊び"], ["勉強","勉強"], ["ｲﾝﾀｰﾝ","ｲﾝﾀｰﾝ"],["その他","その他"], ["特になし",""]], class: "select" %>
   </div>
 
   <div class="actions">

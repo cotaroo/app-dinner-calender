@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2019_04_24_104140) do
     t.string "content"
     t.string "comment"
     t.date "start_time"
+    t.date "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
