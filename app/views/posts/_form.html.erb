@@ -17,13 +17,6 @@
   </div>
 
   <div class="time">
-    <%# 全体の動きを把握したい時はこのコメントを外して実行すること。その際は①のコードはコメントアウトする %>
-    <%#%
-    <%= @post.start_time %>
-     <%#%
-    <%= form.hidden_field :start_time, {default: :start_time}%>
-
-    <%# 実行する際にコメントアウトするコード① 今は不入力フォームの見栄えの確認のためにこちらを採用している%>
     
     <%= form.date_select :start_time, {default: :start_time}%>
     
