@@ -1,38 +1,27 @@
 <%= render 'layouts/header' %>
 
-  <% @posts.each do |post| %>
-    <% if post.start_time.month >= $this_date.month %>
-      <% @data_count += 1 %>
-    <% end %>
-  <% end %>
-
 <%= month_calendar events: @posts do |date, posts| %>
   
   <%=  date.day  %>
   
-  
-    <% if posts.blank? && @count > @data_count && date >= Date.today %>
+    <% if posts.blank? && date >= Date.today %>
       <div class="content">
         未定
       </div>
-    <% elsif posts.blank? && @count <= @data_count && date >= Date.today %>
-      <div  class="content">
-        ◯
-      </div>
     <% elsif date >= Date.today %>
+
       <% posts.each do |post| %>
-         <% if  post.start_time.month >= $this_date.month %>
-          <% @count += 1 %>
-        <% end %>
+
         <div class="content">
           <%=  post.content  %>
         </div>
+
         <div class="comment">
           <%=  post.comment  %>
         </div>
+
       <% end %>
+
     <% end %>
-
-  
-
+    
 <% end %>

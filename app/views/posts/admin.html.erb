@@ -4,33 +4,22 @@
 
 <br>
 
-  <% @posts.each do |post| %>
-    <% if post.start_time.month >= $this_date.month %>
-      <% @data_count += 1 %>
-    <% end %>
-  <% end %>
+
 
 <%= month_calendar events: @posts do |date, posts| %>
   
   <%=  date.day  %>
   
   
-    <% if posts.blank? && @count > @data_count && date >= Date.today %>
+    <% if posts.blank? && date >= Date.today %>
       <div class="content">
       <%= link_to "未定", new_post_path(start_time: date) %>
-    </div>
-  <% elsif posts.blank? && @count <= @data_count && date >= Date.today %>
-    <div  class="content">
-      <%= link_to "◯", posts_admin_path(post:{content: "◯", start_time: date}),  method: :post %>
-    </div>
-
+      </div>
+  
   <% elsif date >= Date.today %>
       <% posts.each do |post| %>
-         <% if post.start_time.month >= $this_date.month %>
-          <% @count += 1 %>
-        <% end %>
         <div class="content">
-        <%= link_to post.content, edit_post_path(post,start_time: date)  %>
+        <%= link_to post.content, edit_post_path(post)  %>
         </div>
         <div class="comment">
           <%=  post.comment  %>

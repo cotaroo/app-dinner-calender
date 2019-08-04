@@ -2,22 +2,40 @@ class LinebotController < ApplicationController
 
 	require 'line/bot'
 
+		@@saved_post = nil
+
 		def push
 
-				@post = Post.find_by(start_time: Date.today)
+				if Post.find_by(start_time: Date.today).present?
+
+					@post = Post.find_by(start_time: Date.today)
+					@@saved_post = @post
+
+				elsif Post.find_by(start_time: Date.today).blank? && (@@saved_post == nil || @@saved_post.end_time < Date.today)
+
+					@@saved_post = nil
+					@post = @@saved_post
+				
+				elsif Post.find_by(start_time: Date.today).blank? && @@saves_post.end_time >= Date.today
+
+					@post = Post.find_by(start_time: Date.today)
+
+				end
 
 				if @post == nil
 					message = {
 						type: 'text',
-						text: "今日は晩ごはんを家で食べます。\n夜19時ごろには家にいると思います。\n変更があれば連絡します。\nいつも美味しいご飯ありがとうございます"
+						text: "今日は晩ごはん家で食べます。\n夜19時ごろには家にいると思います。\nいつも美味しいご飯ありがとうございます"
 					}
+				elsif @post.comment == "ｲﾝﾀｰﾝ"
+						
 				else
 				
 					case @post.content
 					when "◯"
 						message = {
 							type: 'text',
-							text: "今日は晩ごはんを家で食べます。\n#{@post.comment}の予定なので遅くなります🙏\nいつも美味しいご飯ありがとうございます"
+							text: "今日は晩ごはん家で食べます。\n#{@post.comment}の予定なので遅くなります🙏\nいつも美味しいご飯ありがとうございます"
 						}
 					when "❌"
 						message = {
@@ -32,7 +50,7 @@ class LinebotController < ApplicationController
 					when "未定"
 						message = {
 							type: 'text',
-							text: "今日の晩ごはん情報ですが、浩太郎が予定を更新し忘れているので、浩太郎に直接聞いてもらえると助かります🙏"
+							text: "今日の晩ごはん情報ですが、浩太郎が予定を更新し忘れているので、浩太郎に直接聞いてください🙏"
 						}
 					when ""
 						message = {
