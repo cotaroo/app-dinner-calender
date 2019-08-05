@@ -19,9 +19,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+
     @post = Post.find(params[:id])
-    # @post.start_time = params[:start_time]
-    # @post.end_time = params[:end_time]
+    
   end
 
   # POST /posts
@@ -29,8 +29,23 @@ class PostsController < ApplicationController
   def create
       @post = Post.new(post_params)
 
-      if Post.where('start_time <= ? and start_time > ?', @post.end_time, @post.start_time).count > 0
-        Post.where('start_time <= ? and start_time > ?', @post.end_time, @post.start_time).destroy_all
+      # 日付が重複した場合に古いデータを削除する
+      if  Post.where('start_time >= ? and start_time <= ?', @post.start_time, @post.end_time).count > 0
+
+        Post.where('start_time >= ? and start_time <= ?', @post.start_time, @post.end_time).destroy_all
+
+      elsif Post.where('end_time >= ? and end_time <= ?', @post.start_time, @post.end_time).count > 0
+
+        Post.where('end_time >= ? and end_time <= ?', @post.start_time, @post.end_time).destroy_all
+
+      elsif Post.where('start_time >= ? and end_time <= ?', @post.start_time, @post.end_time).count > 0
+
+        Post.where('start_time >= ? and end_time <= ?', @post.start_time, @post.end_time).destroy_all
+
+      elsif Post.where('start_time <= ? and end_time >= ?', @post.start_time, @post.end_time).count > 0
+
+        Post.where('start_time <= ? and end_time >= ?', @post.start_time, @post.end_time).destroy_all
+
       end
      
     respond_to do |format|
@@ -47,6 +62,26 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
+     # 日付が重複した場合に古いデータを削除する
+    if  Post.where('start_time >= ? and start_time <= ?', @post.start_time, @post.end_time).count > 0
+
+      Post.where('start_time >= ? and start_time <= ?', @post.start_time, @post.end_time).destroy_all
+
+    elsif Post.where('end_time >= ? and end_time <= ?', @post.start_time, @post.end_time).count > 0
+
+      Post.where('end_time >= ? and end_time <= ?', @post.start_time, @post.end_time).destroy_all
+
+    elsif Post.where('start_time >= ? and end_time <= ?', @post.start_time, @post.end_time).count > 0
+
+      Post.where('start_time >= ? and end_time <= ?', @post.start_time, @post.end_time).destroy_all
+
+    elsif Post.where('start_time <= ? and end_time >= ?', @post.start_time, @post.end_time).count > 0
+
+      Post.where('start_time <= ? and end_time >= ?', @post.start_time, @post.end_time).destroy_all
+
+    end
+
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to posts_admin_path(start_date: @post.start_time), notice: '予定を編集しました' }
