@@ -18,7 +18,7 @@ class LinebotController < ApplicationController
 				
 				elsif Post.find_by(start_time: Date.today).blank? && @@saves_post.end_time >= Date.today
 
-					@post = Post.find_by(start_time: Date.today)
+					@post = @@saved_post
 
 				end
 
