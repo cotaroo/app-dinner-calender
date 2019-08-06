@@ -6,9 +6,9 @@ class LinebotController < ApplicationController
 
 		def push
 
-				if Post.find_by(start_time: Date.today).present?
+				if Post.find_by(start_time: Date.today - 1).present?
 
-					@post = Post.find_by(start_time: Date.today)
+					@post = Post.find_by(start_time: Date.today - 1) 
 					@@saved_post = @post
 
 				elsif Post.find_by(start_time: Date.today).blank? && (@@saved_post == nil || @@saved_post.end_time < Date.today)
@@ -16,9 +16,9 @@ class LinebotController < ApplicationController
 					@@saved_post = nil
 					@post = @@saved_post
 				
-				elsif Post.find_by(start_time: Date.today).blank? && @@saves_post.end_time >= Date.today
+				elsif Post.find_by(start_time: Date.today).blank? && @@saved_post.end_time >= Date.today
 
-					@post = Post.find_by(start_time: Date.today)
+					@post = @@saved_post
 
 				end
 
@@ -62,10 +62,10 @@ class LinebotController < ApplicationController
 				end
 		
         client = Line::Bot::Client.new { |config|
-            config.channel_secret = "da5be14c010d092c6a188bf9fb79f071"
-            config.channel_token = "l6MsxS40JGaFsZlSSR3br5fZ1i6Ofks3hELPEne65kqzM695FyfjS1fgVUMWB93Vt/XCa0mY9nZTdOJ7/eqYoQnFCzEEBDrV7kiILjIqqf7+1Nqj7vpxnmZO6vUgwYWhU4RzTt6hH49bykuVByprcwdB04t89/1O/w1cDnyilFU="
+            config.channel_secret = "68205f7a1e3339f3c020d80148a820e9"
+            config.channel_token = "RwgTi9ap0+o3zeMJNITgJ4nDbNyLZNM+t4fi2OWIpC5B7/MDJyAE3kVZA7dtKpGjPuasUU7cYvTWPivXJDxZPFdymU5isWEXVL7mFROsgUG8scfCCvBoybZwp3GRVuOqidqUr9ltcxgQnavqikFFngdB04t89/1O/w1cDnyilFU="
         }
-        response = client.push_message("Ccbf94e2e1eac61156ffd7be4aee3f1bd", message)
+        response = client.push_message("Ubb563e765d94830aa20f3a1a251de66c", message)
         p response
 		end
 		
@@ -74,8 +74,8 @@ class LinebotController < ApplicationController
 
   def client
     @client ||= Line::Bot::Client.new { |config|
-      config.channel_secret = "da5be14c010d092c6a188bf9fb79f071"
-      config.channel_token = "l6MsxS40JGaFsZlSSR3br5fZ1i6Ofks3hELPEne65kqzM695FyfjS1fgVUMWB93Vt/XCa0mY9nZTdOJ7/eqYoQnFCzEEBDrV7kiILjIqqf7+1Nqj7vpxnmZO6vUgwYWhU4RzTt6hH49bykuVByprcwdB04t89/1O/w1cDnyilFU="
+      config.channel_secret = "68205f7a1e3339f3c020d80148a820e9"
+      config.channel_token = "RwgTi9ap0+o3zeMJNITgJ4nDbNyLZNM+t4fi2OWIpC5B7/MDJyAE3kVZA7dtKpGjPuasUU7cYvTWPivXJDxZPFdymU5isWEXVL7mFROsgUG8scfCCvBoybZwp3GRVuOqidqUr9ltcxgQnavqikFFngdB04t89/1O/w1cDnyilFU="
     }
   end
 

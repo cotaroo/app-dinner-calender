@@ -11,12 +11,12 @@
   <%=  date.day  %>
   
   
-    <% if posts.blank? && date >= Date.today %>
+    <% if posts.blank? && date >= Date.today%>
       <div class="content">
       <%= link_to "未定", new_post_path(start_time: date) %>
       </div>
   
-  <% elsif date >= Date.today %>
+  <% elsif date >= Date.today%>
       <% posts.each do |post| %>
         <div class="content">
         <%= link_to post.content, edit_post_path(post)  %>
