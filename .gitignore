@@ -31,4 +31,4 @@
 /config/master.key
 public/uploads
 
-app/controllers/linebot_controller.rb
+# app/controllers/linebot_controller.rb
