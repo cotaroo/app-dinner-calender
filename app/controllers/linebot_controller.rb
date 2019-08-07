@@ -4,6 +4,75 @@ class LinebotController < ApplicationController
 
 		@@saved_post = nil
 
+		# callbackアクションのCSRFトークン認証を無効
+		protect_from_forgery :except => [:callback]
+
+		def callback
+			body = request.body.read
+			signature = request.env['HTTP_X_LINE_SIGNATURE']
+			unless client.validate_signature(body, signature)
+				error 400 do 'Bad Request' end
+			end
+			events = client.parse_events_from(body)
+	
+			events.each do |event|
+				case event
+				when Line::Bot::Event::Message
+					case event.type
+					when Line::Bot::Event::MessageType::Text
+						day = event.message['text'].sub(/\d+月/, "").delete("^0-9")
+						if day != nil
+							if day.to_i > Date.today.day.to_i
+
+								@post = Post.find_by(start_time: "2019-8-" + day)
+
+							end
+
+							if @post == nil
+								message = {
+									type: 'text',
+									text: day + "日は家で食べます。\n夜7時ごろには家にいると思います。"
+								}
+							elsif @post.comment == "ｲﾝﾀｰﾝ"
+									
+							else
+
+								case @post.content
+								when "◯"
+									message = {
+										type: 'text',
+										text: day + "日は家で食べます。\n#{@post.comment}の予定なので遅くなります🙏"
+									}
+								when "❌"
+									message = {
+										type: 'text',
+										text: day + "日は#{@post.comment}の予定なので、晩ごはんはいらないです。"
+									}
+								when "🔺"
+									message = {
+										type: 'text',
+										text: day + "日は晩ごはんどうなるかわからないです😥\n当日の連絡をお待ちください。"
+									}
+								when "未定"
+									message = {
+										type: 'text',
+										text: day + "日の晩ごはん情報は未定です🙏\n当予定の更新をお待ちください。"
+									}
+								when ""
+									message = {
+										type: 'text',
+										text: day + "日は家で食べます。\n夜7時ごろには家にいると思います。"
+									}
+								end
+							end
+						end
+					end
+				end
+				client.reply_message(event['replyToken'], message)
+			end
+			head :ok
+		end
+
 		def push
 
 				if Post.find_by(start_time: Date.today).present?
@@ -16,7 +85,7 @@ class LinebotController < ApplicationController
 					@@saved_post = nil
 					@post = @@saved_post
 				
-				elsif Post.find_by(start_time: Date.today).blank? && @@saves_post.end_time >= Date.today
+				elsif Post.find_by(start_time: Date.today).blank? && @@saved_post.end_time >= Date.today
 
 					@post = @@saved_post
 
@@ -25,7 +94,7 @@ class LinebotController < ApplicationController
 				if @post == nil
 					message = {
 						type: 'text',
-						text: "今日は晩ごはん家で食べます。\n夜7時ごろには家にいると思います。\nいつも美味しいご飯ありがとうございます"
+						text: "今日の晩ごはん情報ですが、予定を更新し忘れているので、浩太郎に直接聞いてください🙏"
 					}
 				elsif @post.comment == "ｲﾝﾀｰﾝ"
 						
@@ -69,9 +138,6 @@ class LinebotController < ApplicationController
         p response
 		end
 		
-  # recieveアクションのCSRFトークン認証を無効
-  protect_from_forgery :except => [:recieve]
-
   def client
     @client ||= Line::Bot::Client.new { |config|
       config.channel_secret = "68205f7a1e3339f3c020d80148a820e9"
@@ -79,22 +145,27 @@ class LinebotController < ApplicationController
     }
   end
 
-  def recieve
-    body = request.body.read
 
-    signature = request.env['HTTP_X_LINE_SIGNATURE']
-    unless client.validate_signature(body, signature)
-      head :bad_request
-    end
+	# recieveアクションのCSRFトークン認証を無効
+  # protect_from_forgery :except => [:recieve]
 
-    events = client.parse_events_from(body)
+	# ユーザIDやグループID取得用
+  # def recieve
+  #   body = request.body.read
 
-    events.each { |event|
-			groupId = event['source']['groupId']  #groupId取得
-			p 'groupID: ' + groupId # groupIdを確
-    }
+  #   signature = request.env['HTTP_X_LINE_SIGNATURE']
+  #   unless client.validate_signature(body, signature)
+  #     head :bad_request
+  #   end
 
-    head :ok
-  end
+  #   events = client.parse_events_from(body)
+
+  #   events.each { |event|
+	# 		groupId = event['source']['groupId']  #groupId取得
+	# 		p 'groupID: ' + groupId # groupIdを確
+  #   }
+
+  #   head :ok
+	# end
 
 end
