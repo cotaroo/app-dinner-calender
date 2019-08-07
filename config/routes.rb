@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get '/' => "home#top"
   get "about" => "home#about"
   get "push" => "linebot#push"
-  post 'recieve' => 'linebot#recieve'
+  post 'callback' => 'linebot#callback'
+  # ユーザIDやグループID取得用
+  # post 'recieve' => 'linebot#recieve'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
