@@ -22,10 +22,11 @@ class LinebotController < ApplicationController
 					when Line::Bot::Event::MessageType::Text
 						day = event.message['text'].sub(/\d+月/, "").delete("^0-9")
 						if day != nil
+
 							if day.to_i > Date.today.day.to_i
 
-								@post = Post.find_by(start_time: "2019-8-" + day)
-
+								@post = Post.find_by("start_time <= ? and end_time >= ?", "2019-09-#{day}", "2019-09-#{day}")
+					
 							end
 
 							if @post == nil
@@ -34,7 +35,10 @@ class LinebotController < ApplicationController
 									text: day + "日は家で食べます。\n夜7時ごろには家にいると思います。"
 								}
 							elsif @post.comment == "ｲﾝﾀｰﾝ"
-									
+								message = {
+									type: 'text',
+									text: day + "日はインターンのため東京にいます。"
+								}
 							else
 
 								case @post.content
