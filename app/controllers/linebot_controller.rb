@@ -20,51 +20,101 @@ class LinebotController < ApplicationController
 				when Line::Bot::Event::Message
 					case event.type
 					when Line::Bot::Event::MessageType::Text
-						day = event.message['text'].sub(/\d+月/, "").delete("^0-9")
-						if day != nil
-							if day.to_i > Date.today.day.to_i
 
-								@post = Post.find_by(start_time: "2019-8-" + day)
+						if /.*\d+日.+？/ === event.message['text'] || /明日.+？/ === event.message['text'] || /明後日.+？/ === event.message['text']
+
+
+							day = event.message['text'].sub(/\d+月/, "").delete("^0-9")
+
+							month = event.message['text'].sub(/\d+日/, "").delete("^0-9")
+
+							if /明日.+？/ === event.message['text']
+
+							day = Date.today.next_day(1).day
+							month = Date.today.next_day(1).month
+
+							elsif /明後日.+？/ === event.message['text']
+
+								day = Date.today.next_day(2).day
+							month = Date.today.next_day(2).month
 
 							end
 
-							if @post == nil
-								message = {
-									type: 'text',
-									text: day + "日は家で食べます。\n夜7時ごろには家にいると思います。"
-								}
-							elsif @post.comment == "ｲﾝﾀｰﾝ"
-									
-							else
+							if /明日.+？/ === event.message['text'] || /明後日.+？/ === event.message['text'] || !day.empty?
 
-								case @post.content
-								when "◯"
+								if /明日.+？/ === event.message['text'] || /明後日.+？/ === event.message['text'] || !month.empty?
+
+									if month.to_i >= Date.today.month.to_i
+
+										year = Date.today.year
+										@post = Post.find_by("start_time <= ? and end_time >= ?", "#{year}-#{format("%02d", month)}-#{format("%02d", day)}", "#{year}-#{format("%02d", month)}-#{format("%02d", day)}")
+
+									else
+
+										year = Date.today.next_year(1).year
+										@post = Post.find_by("start_time <= ? and end_time >= ?", "#{year}-#{format("%02d", month)}-#{format("%02d", day)}", "#{year}-#{format("%02d", month)}-#{format("%02d", day)}")
+
+									end
+
+								else
+
+									if day.to_i > Date.today.day.to_i
+
+										year = Date.today.year
+										month = Date.today.month
+										@post = Post.find_by("start_time <= ? and end_time >= ?", "#{year}-#{format("%02d", month)}-#{format("%02d", day)}", "#{year}-#{format("%02d", month)}-#{format("%02d", day)}")
+							
+									else
+
+										year = Date.today.next_month(1).year
+										month = Date.today.next_month(1).month
+										@post = Post.find_by("start_time <= ? and end_time >= ?", "#{year}-#{format("%02d", month)}-#{format("%02d", day)}", "#{year}-#{format("%02d", month)}-#{format("%02d", day)}")
+									end
+
+								end
+
+								if @post == nil
 									message = {
 										type: 'text',
-										text: day + "日は家で食べます。\n#{@post.comment}の予定なので遅くなります🙏"
+										text: "#{month}月#{day}日の晩ごはん情報は未定です🙏\n予定の更新をお待ちください。"
 									}
-								when "❌"
+								elsif @post.comment == "ｲﾝﾀｰﾝ"
 									message = {
 										type: 'text',
-										text: day + "日は#{@post.comment}の予定なので、晩ごはんはいらないです。"
+										text: "#{month}月#{day}日はインターンのため東京にいます。"
 									}
-								when "🔺"
-									message = {
-										type: 'text',
-										text: day + "日は晩ごはんどうなるかわからないです😥\n当日の連絡をお待ちください。"
-									}
-								when "未定"
-									message = {
-										type: 'text',
-										text: day + "日の晩ごはん情報は未定です🙏\n当予定の更新をお待ちください。"
-									}
-								when ""
-									message = {
-										type: 'text',
-										text: day + "日は家で食べます。\n夜7時ごろには家にいると思います。"
-									}
+								else
+
+									case @post.content
+									when "◯"
+										message = {
+											type: 'text',
+											text: "#{month}月#{day}日は家で食べます。\n#{@post.comment}の予定なので遅くなります🙏"
+										}
+									when "❌"
+										message = {
+											type: 'text',
+											text: "#{month}月#{day}日は#{@post.comment}の予定なので、晩ごはんはいらないです。"
+										}
+									when "🔺"
+										message = {
+											type: 'text',
+											text: "#{month}月#{day}日は晩ごはんどうなるかわからないです😥\n当日の連絡をお待ちください。"
+										}
+									when "未定"
+										message = {
+											type: 'text',
+											text: "#{month}月#{day}日の晩ごはん情報は未定です🙏\n予定の更新をお待ちください。"
+										}
+									when ""
+										message = {
+											type: 'text',
+											text: "#{month}月#{day}日は家で食べます。\n夜7時ごろには家にいると思います。"
+										}
+									end
 								end
 							end
+
 						end
 					end
 				end
