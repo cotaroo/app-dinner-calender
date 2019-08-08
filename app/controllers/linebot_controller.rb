@@ -21,7 +21,7 @@ class LinebotController < ApplicationController
 					case event.type
 					when Line::Bot::Event::MessageType::Text
 
-						if /.*\d+日.+？/ === event.message['text'] || /明日.+？/ === event.message['text'] || /曜日.+？/ === event.message['text']
+						if /.*\d+日.+？/ === event.message['text'] || /明日.+？/ === event.message['text'] || /明後日.+？/ === event.message['text']
 
 
 							day = event.message['text'].sub(/\d+月/, "").delete("^0-9")
@@ -33,11 +33,16 @@ class LinebotController < ApplicationController
 							day = Date.today.next_day(1).day
 							month = Date.today.next_day(1).month
 
+							elsif /明後日.+？/ === event.message['text']
+
+								day = Date.today.next_day(2).day
+							month = Date.today.next_day(2).month
+
 							end
 
-							if /明日.+？/ === event.message['text'] || !day.empty?
+							if /明日.+？/ === event.message['text'] || /明後日.+？/ === event.message['text'] || !day.empty?
 
-								if /明日.+？/ === event.message['text'] || !month.empty?
+								if /明日.+？/ === event.message['text'] || /明後日.+？/ === event.message['text'] || !month.empty?
 
 									if month.to_i >= Date.today.month.to_i
 
