@@ -118,7 +118,7 @@ class LinebotController < ApplicationController
 						end
 					end
 				end
-				client.reply_message(event['replyToken'], message)
+				client.reply_message("Ccbf94e2e1eac61156ffd7be4aee3f1bd", message)
 			end
 			head :ok
 		end
