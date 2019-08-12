@@ -2,7 +2,7 @@ class LinebotController < ApplicationController
 
 	require 'line/bot'
 
-		@@saved_post = nil
+		# @@saved_post = nil
 
 		# callbackアクションのCSRFトークン認証を無効
 		protect_from_forgery :except => [:callback]
@@ -125,30 +125,27 @@ class LinebotController < ApplicationController
 
 		def push
 
-				if Post.find_by(start_time: Date.today).present?
+				# if Post.find_by(start_time: Date.today).present?
 
-					@post = Post.find_by(start_time: Date.today)
-					@@saved_post = @post
+				# 	@post = Post.find_by(start_time: Date.today)
+				# 	@@saved_post = @post
 
-				elsif Post.find_by(start_time: Date.today).blank? && (@@saved_post == nil || @@saved_post.end_time < Date.today)
+				# elsif Post.find_by(start_time: Date.today).blank? && (@@saved_post == nil || @@saved_post.end_time < Date.today)
 
-					@@saved_post = nil
-					@post = @@saved_post
+				# 	@@saved_post = nil
+				# 	@post = @@saved_post
 				
-				elsif Post.find_by(start_time: Date.today).blank? && @@saved_post.end_time >= Date.today
+				# elsif Post.find_by(start_time: Date.today).blank? && @@saved_post.end_time >= Date.today
 
-					@post = @@saved_post
+				# 	@post = @@saved_post
 
-				end
+				# end
 
-				if @post == nil
-					message = {
-						type: 'text',
-						text: "今日の晩ごはん情報ですが、予定を更新し忘れているので、浩太郎に直接聞いてください🙏"
-					}
-				elsif @post.comment == "ｲﾝﾀｰﾝ"
+				@post = Post.find_by("start_time <= ? and end_time >= ?", Date.today, Date.today)
+
+				if @post.comment == "ｲﾝﾀｰﾝ"
 						
-				else
+				elsif @post != nil?
 				
 					case @post.content
 					when "◯"
@@ -178,6 +175,11 @@ class LinebotController < ApplicationController
 						}
 					end
 
+				else
+						message = {
+							type: 'text',
+							text: "今日の晩ごはん情報ですが、予定を更新し忘れているので、浩太郎に直接聞いてください🙏"
+						}
 				end
 		
         client = Line::Bot::Client.new { |config|
