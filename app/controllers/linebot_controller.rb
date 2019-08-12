@@ -144,6 +144,13 @@ class LinebotController < ApplicationController
 				@post = Post.find_by("start_time <= ? and end_time >= ?", Date.today, Date.today)
 
 				if @post.comment == "ｲﾝﾀｰﾝ"
+
+				elsif @post.comment == ""
+					
+					message = {
+						type: 'text',
+						text: "今日は晩ごはんを家で食べます。\n夜19時ごろには家にいると思います。\n変更があれば連絡します。\nいつも美味しいご飯ありがとうございます"
+					}
 						
 				elsif @post != nil?
 				
@@ -167,11 +174,6 @@ class LinebotController < ApplicationController
 						message = {
 							type: 'text',
 							text: "今日の晩ごはん情報ですが、予定を更新し忘れているので、浩太郎に直接聞いてください🙏"
-						}
-					when ""
-						message = {
-							type: 'text',
-							text: "今日は晩ごはんを家で食べます。\n夜19時ごろには家にいると思います。\n変更があれば連絡します。\nいつも美味しいご飯ありがとうございます"
 						}
 					end
 
