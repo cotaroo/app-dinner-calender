@@ -64,21 +64,21 @@ class PostsController < ApplicationController
   def update
 
      # 日付が重複した場合に古いデータを削除する
-    if  Post.where('start_time >= ? and start_time <= ?', @post.start_time, @post.end_time).count > 0
+    if  Post.where('start_time > ? and start_time < ?', @post.start_time, @post.end_time).count > 0
 
-      Post.where('start_time >= ? and start_time <= ?', @post.start_time, @post.end_time).destroy_all
+      Post.where('start_time > ? and start_time < ?', @post.start_time, @post.end_time).destroy_all
 
-    elsif Post.where('end_time >= ? and end_time <= ?', @post.start_time, @post.end_time).count > 0
+    elsif Post.where('end_time > ? and end_time < ?', @post.start_time, @post.end_time).count > 0
 
-      Post.where('end_time >= ? and end_time <= ?', @post.start_time, @post.end_time).destroy_all
+      Post.where('end_time > ? and end_time < ?', @post.start_time, @post.end_time).destroy_all
 
-    elsif Post.where('start_time >= ? and end_time <= ?', @post.start_time, @post.end_time).count > 0
+    elsif Post.where('start_time > ? and end_time < ?', @post.start_time, @post.end_time).count > 0
 
-      Post.where('start_time >= ? and end_time <= ?', @post.start_time, @post.end_time).destroy_all
+      Post.where('start_time > ? and end_time < ?', @post.start_time, @post.end_time).destroy_all
 
-    elsif Post.where('start_time <= ? and end_time >= ?', @post.start_time, @post.end_time).count > 0
+    elsif Post.where('start_time < ? and end_time > ?', @post.start_time, @post.end_time).count > 0
 
-      Post.where('start_time <= ? and end_time >= ?', @post.start_time, @post.end_time).destroy_all
+      Post.where('start_time < ? and end_time > ?', @post.start_time, @post.end_time).destroy_all
 
     end
 
